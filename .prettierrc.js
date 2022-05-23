@@ -11,7 +11,7 @@ module.exports = {
   // see more here: https://github.com/trivago/prettier-plugin-sort-imports
   importOrder: [
     // react
-    '^react$',
+    '^react.*',
 
     // any other third party packages
     '<THIRD_PARTY_MODULES>',

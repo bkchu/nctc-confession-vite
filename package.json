@@ -37,15 +37,27 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.1",
+    "@uiw/react-md-editor": "^3.13.0",
+    "clsx": "^1.1.1",
+    "flowbite": "^1.4.7",
+    "lodash.groupby": "^4.6.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.31.2",
+    "react-markdown": "^8.0.3",
+    "react-query": "^3.39.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.43",
+    "@supabase/supabase-js": "^1.35.3",
     "@svgr/core": "^6.2.1",
+    "@tailwindcss/typography": "^0.5.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/lodash.groupby": "^4.6.7",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/testing-library__jest-dom": "^5.14.3",

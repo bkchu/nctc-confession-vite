@@ -2,20 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/Inter-Medium.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/Inter-Bold.woff2') format('woff2');
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.ring-expand {
-  @apply transition-all hover:ring-2 ring-gray-900 dark:ring-gray-100 hover:ring-offset-4 hover:ring-offset-white dark:hover:ring-offset-gray-800;
+@layer components {
+  .ring-expand {
+    @apply transition-all hover:ring-2 ring-gray-900 dark:ring-gray-100 hover:ring-offset-4 hover:ring-offset-white dark:hover:ring-offset-gray-800;
+  }
 }

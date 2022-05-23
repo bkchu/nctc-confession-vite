@@ -1,2 +1,4 @@
 export * from './DarkModeSwitcher';
-export * from './Navbar';
+export * from './Select';
+export * from './Sidebar';
+export * from './Text';
