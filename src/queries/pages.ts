@@ -94,13 +94,19 @@ export const useUpdatePageContent = (
     {
       ...useMutationOptions,
       onMutate: async ({ content }) => {
+        // cancel outgoing queries
         await queryClient.cancelQueries(queryKey);
+
+        // get a snapshot of the previous state
         const previousContent = queryClient.getQueryData(queryKey) as {
           slug: string;
           content: string;
         };
+
+        // set the new data
         queryClient.setQueryData(queryKey, content);
 
+        // return the snapshot of previous state (used as a fallback in onError; shape is defined in the mutation types)
         return { previousContent };
       },
       // If the mutation fails, use the context returned from onMutate to roll back
