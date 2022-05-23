@@ -1,6 +1,11 @@
-import { UseQueryOptions, useQuery } from 'react-query';
+import {
+  UseMutationOptions,
+  UseQueryOptions,
+  useMutation,
+  useQuery
+} from 'react-query';
 import { PageContent, PageLink } from 'types';
-import { supabase } from 'utils';
+import { queryClient, supabase } from 'utils';
 
 export const useGetLinks = (
   useQueryOptions?: UseQueryOptions<PageLink[], Error>
@@ -27,9 +32,8 @@ export const useGetPageContent = (
   slug?: string,
   useQueryOptions?: UseQueryOptions<PageContent | undefined, Error>
 ) => {
-  const email = supabase.auth.user()?.email;
   return useQuery<PageContent | undefined, Error>(
-    ['page', slug, { email }],
+    ['page', { slug }],
     async () => {
       if (!slug) {
         return;
@@ -48,5 +52,65 @@ export const useGetPageContent = (
       return data;
     },
     { ...useQueryOptions, enabled: !!slug }
+  );
+};
+
+export const useUpdatePageContent = (
+  theSlug?: string,
+  useMutationOptions?: UseMutationOptions<
+    PageContent | undefined,
+    Error,
+    { content: string },
+    { previousContent: { content: string; slug: string } }
+  >
+) => {
+  const queryKey = ['page', { slug: theSlug }];
+
+  return useMutation<
+    PageContent | undefined,
+    Error,
+    { content: string },
+    { previousContent: { content: string; slug: string } }
+  >(
+    ['page', { slug: theSlug }],
+    async ({ content }) => {
+      if (!theSlug) {
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from<PageContent>('Pages')
+        .update({ content })
+        .eq('slug', theSlug)
+        .select('slug,content')
+        .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return data;
+    },
+    {
+      ...useMutationOptions,
+      onMutate: async ({ content }) => {
+        await queryClient.cancelQueries(queryKey);
+        const previousContent = queryClient.getQueryData(queryKey) as {
+          slug: string;
+          content: string;
+        };
+        queryClient.setQueryData(queryKey, content);
+
+        return { previousContent };
+      },
+      // If the mutation fails, use the context returned from onMutate to roll back
+      onError: (_err, _newContent, context) => {
+        queryClient.setQueryData(queryKey, context?.previousContent);
+      },
+      // Always refetch after error or success:
+      onSettled: async () => {
+        await queryClient.invalidateQueries(queryKey);
+      }
+    }
   );
 };

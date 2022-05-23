@@ -14,6 +14,12 @@ export const DarkModeSwitcher = () => {
 
   useEffect(() => {
     setIsMounted(true);
+
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.setAttribute('data-color-mode', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-color-mode', 'light');
+    }
   }, []);
 
   return isMounted ? (
