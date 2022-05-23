@@ -30,13 +30,13 @@ export const useGetLinks = (
 
 export const useGetPageContent = (
   slug?: string,
-  useQueryOptions?: UseQueryOptions<PageContent | undefined, Error>
+  useQueryOptions?: UseQueryOptions<PageContent, Error>
 ) => {
-  return useQuery<PageContent | undefined, Error>(
+  return useQuery<PageContent, Error>(
     ['page', { slug }],
     async () => {
       if (!slug) {
-        return;
+        return { content: '', slug: '' };
       }
 
       const { data, error } = await supabase
