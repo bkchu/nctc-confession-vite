@@ -23,9 +23,15 @@ export const DarkModeSwitcher = () => {
         if (document.documentElement.classList.contains('dark')) {
           localStorage.theme = 'light';
           setIsDarkMode(false);
+
+          // for markdown editor
+          document.documentElement.setAttribute('data-color-mode', 'light');
         } else {
           localStorage.theme = 'dark';
           setIsDarkMode(true);
+
+          // for markdown editor
+          document.documentElement.setAttribute('data-color-mode', 'dark');
         }
         document.documentElement.classList.toggle('dark');
       }}
