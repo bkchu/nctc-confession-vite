@@ -1,6 +1,10 @@
 import { Version, Versions } from 'types';
 import books from './bibleAbbreviations';
 
+// matches verse references like 'John 3:16'
+export const verseReferenceRegex =
+  /(?:(\d)\s{1})?(\w+)\s{1}(\d+):(\d+)(?:-?(\d+))?/gi;
+
 const replacer =
   (
     version: Version,
@@ -56,9 +60,10 @@ export const bibleVerseParser = (
 ): string => {
   const contents = str.slice();
 
-  const regex = /(?:(\d)\s{1})?(\w+)\s{1}(\d+):(\d+)(?:-?(\d+))?/gi;
-
-  const replaced = contents.replace(regex, replacer(version, format));
+  const replaced = contents.replace(
+    verseReferenceRegex,
+    replacer(version, format)
+  );
 
   return replaced;
 };

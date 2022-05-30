@@ -24,7 +24,7 @@ export const DarkModeSwitcher = () => {
 
   return isMounted ? (
     <button
-      className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full dark:bg-gray-800 ring-expand"
+      className="flex items-center justify-center w-12 h-12 bg-slate-200 rounded-full dark:bg-slate-800 ring-expand"
       onClick={() => {
         if (document.documentElement.classList.contains('dark')) {
           localStorage.theme = 'light';
@@ -43,9 +43,9 @@ export const DarkModeSwitcher = () => {
       }}
     >
       {isDarkMode ? (
-        <Sun className="w-6 h-6 text-gray-200" />
+        <Sun className="w-6 h-6 text-slate-200" />
       ) : (
-        <Moon className="w-6 h-6 text-gray-800" />
+        <Moon className="w-6 h-6 text-slate-800" />
       )}
     </button>
   ) : null;

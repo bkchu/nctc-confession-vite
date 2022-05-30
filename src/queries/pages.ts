@@ -31,8 +31,8 @@ export const useGetLinks = (
 export const useGetPageContent = (
   slug?: string,
   useQueryOptions?: UseQueryOptions<PageContent, Error>
-) => {
-  return useQuery<PageContent, Error>(
+) =>
+  useQuery<PageContent, Error>(
     ['page', { slug }],
     async () => {
       if (!slug) {
@@ -53,7 +53,6 @@ export const useGetPageContent = (
     },
     { ...useQueryOptions, enabled: !!slug }
   );
-};
 
 export const useUpdatePageContent = (
   theSlug?: string,

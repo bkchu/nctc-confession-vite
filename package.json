@@ -37,8 +37,11 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^0.7.1",
+    "@floating-ui/react-dom-interactions": "^0.6.3",
     "@headlessui/react": "^1.6.1",
     "@uiw/react-md-editor": "^3.13.0",
+    "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "flowbite": "^1.4.7",
     "lodash.groupby": "^4.6.0",
@@ -48,7 +51,8 @@
     "react-markdown": "^8.0.3",
     "react-query": "^3.39.0",
     "react-router-dom": "^6.3.0",
-    "rehype-sanitize": "^5.0.1"
+    "rehype-sanitize": "^5.0.1",
+    "string-strip-html": "^9.1.12"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.43",

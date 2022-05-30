@@ -41,7 +41,7 @@ export const Login = () => {
       >
         <label
           htmlFor="email-address-icon"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          className="block mb-2 text-sm font-medium text-slate-900 dark:text-slate-300"
         >
           Email Address
         </label>
@@ -49,7 +49,7 @@ export const Login = () => {
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                className="w-5 h-5 text-slate-500 dark:text-slate-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ export const Login = () => {
             <input
               type="email"
               id="email-address-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+              className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
               placeholder="john.doe@nctc.com"
               {...register('email', {
                 required: { value: true, message: 'Please type in an email.' },
@@ -81,7 +81,7 @@ export const Login = () => {
         </div>
         <label
           htmlFor="email-address-icon"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          className="block mb-2 text-sm font-medium text-slate-900 dark:text-slate-300"
         >
           Password
         </label>
@@ -106,7 +106,7 @@ export const Login = () => {
             <input
               type="password"
               id="password-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+              className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
               {...register('password', {
                 minLength: {
                   value: 6,

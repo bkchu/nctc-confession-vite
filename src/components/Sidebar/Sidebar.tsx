@@ -39,7 +39,9 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
       {isOpen && (
         <div className="fixed top-0 bottom-0 z-50 w-full h-auto p-4 overflow-scroll bg-violet-100 md:hidden">
           <div className="flex items-center justify-between mb-4">
-            <Text variant="eyebrow">PAGES</Text>
+            <Text variant="eyebrow" className="dark:text-slate-300">
+              PAGES
+            </Text>
             <button
               className="flex items-center justify-center w-12 h-12 md:hidden"
               onClick={() => setIsOpen(false)}
@@ -96,7 +98,9 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
       )}
       <div className="hidden md:top-0 md:bottom-0 md:z-50 md:h-auto md:p-4 md:block md:overflow-auto md:w-72 md:sticky">
         <div className="flex items-center justify-between mb-4">
-          <Text variant="eyebrow">PAGES</Text>
+          <Text variant="eyebrow" className="dark:text-slate-300">
+            PAGES
+          </Text>
           <button
             className="flex items-center justify-center w-12 h-12 md:hidden"
             onClick={() => setIsOpen(false)}
@@ -121,7 +125,7 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
           <Fragment key={index}>
             <Text
               variant="body"
-              className="my-2 text-sm font-bold text-violet-500"
+              className="my-2 text-sm font-bold text-violet-500 dark:text-violet-400"
             >
               {index}
             </Text>
@@ -132,8 +136,8 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
                     to={`/page/${link.slug}`}
                     className={({ isActive }) =>
                       isActive
-                        ? 'font-bold bg-violet-100 block px-2 py-1 rounded-sm border-l-violet-300 border-l-4'
-                        : 'block px-2 py-1 pl-0'
+                        ? 'font-bold bg-violet-100 dark:text-slate-100 dark:bg-violet-800 opacity-80 block px-2 py-1 rounded-sm border-l-violet-300 border-l-4'
+                        : 'prose prose-slate block px-2 py-1 pl-0 dark:prose-invert'
                     }
                   >
                     <Text

@@ -14,7 +14,7 @@ export const Edit = () => {
   const { mutateAsync: update, isLoading: isUpdateLoading } =
     useUpdatePageContent(params.slug, {
       onSuccess: () => {
-        navigate(-1);
+        navigate(`/page/${params.slug}`);
       }
     });
 

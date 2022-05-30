@@ -30,12 +30,14 @@ export const Select = ({ items, defaultValue }: SelectProps): JSX.Element => {
   return (
     <div className="w-32">
       <Listbox value={selectedOption} onChange={onChange}>
-        <div className="relative">
-          <Listbox.Button className="relative w-full h-12 py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-violet-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-            <span className="block truncate">{selectedOption.label}</span>
+        <div className="relative w-full">
+          <Listbox.Button className="relative w-full py-2.5 pl-5 pr-10 text-sm font-medium text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-slate-700 focus:z-10 focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">
+            <span className="block text-left truncate">
+              {selectedOption.label}
+            </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-slate-400"
                 aria-hidden="true"
               />
             </span>
@@ -52,7 +54,9 @@ export const Select = ({ items, defaultValue }: SelectProps): JSX.Element => {
                   key={itemIdx}
                   className={({ active }) =>
                     `cursor-default select-none relative py-2 pl-10 pr-4 ${
-                      active ? 'text-violet-900 bg-violet-100' : 'text-gray-900'
+                      active
+                        ? 'text-violet-900 bg-violet-100'
+                        : 'text-slate-900'
                     }`
                   }
                   value={item}

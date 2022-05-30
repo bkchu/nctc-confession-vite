@@ -42,7 +42,8 @@ export const VersionProvider = ({
 
   return (
     <VersionContext.Provider value={contextValue}>
-      {children}
+      {/* checking if this exists because pulling from localStorage can take time */}
+      {versionState ? children : null}
     </VersionContext.Provider>
   );
 };
