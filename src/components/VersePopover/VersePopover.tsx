@@ -18,7 +18,7 @@ export const VersePopover = ({
   return (
     <Popover
       render={({ close, labelId, descriptionId }) => (
-        <span className="z-50 block max-w-sm p-6 prose bg-white border rounded-lg shadow-md border-slate-200 prose-slate dark:prose-invert hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700">
+        <span className="z-50 block max-w-sm p-6 prose bg-white border rounded-lg shadow-md border-slate-200 prose-slate dark:prose-invert dark:bg-slate-800 dark:border-slate-700">
           <blockquote className="dark:text-white" id={descriptionId}>
             {verse} <br />
           </blockquote>
