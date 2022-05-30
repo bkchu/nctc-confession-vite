@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { useLogin } from 'queries/auth';
+import Key from '~icons/heroicons-outline/key';
+import Mail from '~icons/heroicons-outline/mail';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export const Login = () => {
   });
 
   return (
-    <div className="w-1/3 mx-auto mt-20">
+    <div className="w-1/3 mx-auto mt-20 prose prose-slate dark:prose-invert">
       <form
         onSubmit={handleSubmit(async ({ email, password }) => {
           await login({ email, password });
@@ -48,15 +50,10 @@ export const Login = () => {
         <div className="mb-6">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
+              <Mail
                 className="w-5 h-5 text-slate-500 dark:text-slate-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-              </svg>
+                aria-hidden="true"
+              />
             </div>
             <input
               type="email"
@@ -88,20 +85,10 @@ export const Login = () => {
         <div className="mb-6">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
-                ></path>
-              </svg>
+              <Key
+                className="w-5 h-5 text-slate-500 dark:text-slate-400"
+                aria-hidden="true"
+              />
             </div>
             <input
               type="password"
@@ -147,7 +134,7 @@ export const Login = () => {
           {isLoginLoading ? 'Loading...' : 'Login'}
         </button>
       </form>
-      <p className="text-sm mt-2 font-medium">
+      <p className="mt-2 text-sm font-medium">
         <span className="font-normal">Don't have an account? </span>
         <Link className="hover:underline" to="/sign-up">
           Sign up

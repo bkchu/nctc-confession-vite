@@ -27,7 +27,6 @@ export const Page = () => {
           <ReactMarkdown
             components={{
               a: ({ node, ...props }) => {
-                console.log(node);
                 const [verseReference, verse] = (
                   props.children[0] as string
                 ).split('--');
