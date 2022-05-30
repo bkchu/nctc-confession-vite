@@ -35,7 +35,7 @@ export const SignUp = () => {
   });
 
   return (
-    <div className="w-1/3 mx-auto mt-20 prose prose-slate dark:prose-invert">
+    <div className="w-64 mx-auto mt-20 prose prose-slate dark:prose-invert">
       <form
         onSubmit={handleSubmit(async ({ email, password }) => {
           await signUp({ email, password });
@@ -111,7 +111,7 @@ export const SignUp = () => {
         </div>
         <button
           type="submit"
-          className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 flex items-center"
+          className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 justify-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 flex items-center"
         >
           {isSignUpLoading && (
             <svg

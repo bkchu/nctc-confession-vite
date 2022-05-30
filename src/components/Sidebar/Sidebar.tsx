@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Text } from 'components/Text';
 import { useGetLinks } from 'queries/pages';
 import { PageLink } from 'types';
+import X from '~icons/heroicons-outline/x';
 
 type Props = {
   setIsOpen: (open: boolean) => void;
@@ -37,7 +38,7 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed top-0 bottom-0 z-50 w-full h-auto p-4 overflow-scroll bg-violet-100 md:hidden">
+        <div className="fixed top-0 bottom-0 z-50 w-full h-auto p-4 overflow-scroll bg-white dark:bg-slate-800 md:hidden">
           <div className="flex items-center justify-between mb-4">
             <Text variant="eyebrow" className="dark:text-slate-300">
               PAGES
@@ -46,20 +47,7 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
               className="flex items-center justify-center w-12 h-12 md:hidden"
               onClick={() => setIsOpen(false)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <X className="w-5 h-5 text-slate-800 dark:text-white" />
             </button>
           </div>
           {groupedLinks.map((group, index) => (
@@ -75,10 +63,11 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
                   <li key={link.slug} className="mb-2 last:mb-0">
                     <NavLink
                       to={`/page/${link.slug}`}
+                      onClick={() => setIsOpen(false)}
                       className={({ isActive }) =>
                         isActive
-                          ? 'font-bold bg-violet-200 block px-2 py-1 rounded-sm border-l-violet-400 border-l-4'
-                          : 'block px-2 py-1 pl-0'
+                          ? 'font-bold bg-violet-100 dark:text-slate-100 dark:bg-violet-800 opacity-80 block px-2 py-1 rounded-sm border-l-violet-300 border-l-4'
+                          : 'prose prose-slate block px-2 py-1 pl-0 dark:prose-invert'
                       }
                     >
                       <Text
@@ -105,20 +94,7 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
             className="flex items-center justify-center w-12 h-12 md:hidden"
             onClick={() => setIsOpen(false)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X className="w-5 h-5 text-slate-800 dark:text-white" />
           </button>
         </div>
         {groupedLinks.map((group, index) => (

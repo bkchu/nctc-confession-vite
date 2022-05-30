@@ -30,7 +30,7 @@ export const Page = () => {
                 const [verseReference, verse] = (
                   props.children[0] as string
                 ).split('--');
-                // return <a target="_blank" {...props} />;
+
                 return (
                   <VersePopover
                     verse={verse}

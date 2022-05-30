@@ -44,7 +44,6 @@ export const VersePopover = ({
       >
         {verseReference}
       </button>
-      {/* <button className="">{verseReference}</button> */}
     </Popover>
   );
 };
