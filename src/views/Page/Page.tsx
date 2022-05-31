@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { VersePopover } from 'components';
 import { useVersionContext } from 'hooks';
 import { useGetPageContent } from 'queries/pages';
+import remarkGfm from 'remark-gfm';
 import { getConfessionMarkdown } from 'services/bible';
 
 export const Page = () => {
@@ -25,6 +26,7 @@ export const Page = () => {
       {markdown ? (
         <article className="prose prose-slate dark:prose-invert">
           <ReactMarkdown
+            rehypePlugins={[remarkGfm]}
             components={{
               a: ({ node, ...props }) => {
                 const [verseReference, verse] = (
@@ -46,7 +48,7 @@ export const Page = () => {
           <div className="my-24">
             <Link
               to="edit"
-              className="text-violet-500 underlined focus:outline-none hover:text-black focus:text-black"
+              className="text-violet-500 underlined focus:outline-none hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white "
             >
               Edit
             </Link>

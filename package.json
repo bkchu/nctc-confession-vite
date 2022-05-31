@@ -52,6 +52,8 @@
     "react-query": "^3.39.0",
     "react-router-dom": "^6.3.0",
     "rehype-sanitize": "^5.0.1",
+    "remark-gfm": "^3.0.1",
+    "sass": "^1.52.1",
     "string-strip-html": "^9.1.12"
   },
   "devDependencies": {

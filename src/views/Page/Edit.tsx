@@ -4,6 +4,7 @@ import MDEditor from '@uiw/react-md-editor';
 import { useAuthRedirect } from 'hooks';
 import { useGetPageContent, useUpdatePageContent } from 'queries/pages';
 import rehypeSanitize from 'rehype-sanitize';
+import './Edit.scss';
 
 export const Edit = () => {
   useAuthRedirect();
@@ -24,14 +25,13 @@ export const Edit = () => {
     }
   }, [data?.content]);
 
-  const updateTheConfession = async () => {
-    await update({ content: value ?? '' });
-  };
+  const updateTheConfession = () => update({ content: value ?? '' });
   return (
     <>
       {data?.content ? (
         <>
           <MDEditor
+            preview="edit"
             value={value}
             onChange={setValue}
             previewOptions={{
@@ -44,7 +44,7 @@ export const Edit = () => {
       <button
         onClick={updateTheConfession}
         disabled={data?.content === value}
-        className="mt-6 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 flex items-center disabled:bg-purple-400 disabled:cursor-not-allowed"
+        className="mt-6 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 flex items-center disabled:bg-purple-400 disabled:cursor-not-allowed disabled:dark:bg-purple-600 disabled:dark:opacity-30"
       >
         {isUpdateLoading ? (
           <svg
