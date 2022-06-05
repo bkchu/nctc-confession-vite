@@ -123,9 +123,10 @@ export const useGetVerses = (
 export const useGetPageMarkdown = (slug?: string) => {
   const { version } = useVersionContext();
   const bibleId = bibleIds[version];
-  const { data: pageContent } = useGetPageContent(slug);
+  const { data: pageContent, isLoading: isLoadingPageContent } =
+    useGetPageContent(slug);
 
-  const { isLoading, verses } = useGetVerses(
+  const { isLoading: isLoadingVerses, verses } = useGetVerses(
     {
       bibleId,
       verseReferences: pageContent?.content
@@ -148,7 +149,10 @@ export const useGetPageMarkdown = (slug?: string) => {
     );
   }, [pageContent, version, verses]);
 
-  return { isLoading, data: replacedString };
+  return {
+    isLoading: isLoadingPageContent || isLoadingVerses,
+    data: replacedString
+  };
 };
 
 export const useUpdatePageContent = (
