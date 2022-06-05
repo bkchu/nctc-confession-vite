@@ -27,3 +27,4 @@ export const Home = () => {
     </>
   );
 };
+className = ' fill-violet-500';
