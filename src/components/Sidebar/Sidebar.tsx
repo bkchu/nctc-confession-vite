@@ -85,7 +85,7 @@ export const Sidebar = ({ setIsOpen, isOpen }: Props) => {
           ))}
         </div>
       )}
-      <div className="hidden md:top-0 md:bottom-0 md:z-50 md:h-auto md:p-4 md:block md:overflow-auto md:w-72 md:sticky">
+      <div className="hidden md:top-0 md:bottom-0 md:z-50 md:h-auto md:p-4 md:block md:overflow-auto md:w-72">
         <div className="flex items-center justify-between mb-4">
           <Text variant="eyebrow" className="dark:text-slate-300">
             PAGES

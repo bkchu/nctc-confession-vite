@@ -1,11 +1,19 @@
+import { useMemo } from 'react';
 import {
   UseMutationOptions,
   UseQueryOptions,
   useMutation,
+  useQueries,
   useQuery
 } from 'react-query';
+import { useVersionContext } from 'hooks';
+import { bibleIds } from 'services/bible';
+import { BibleAPISearchResponse } from 'services/types/bible';
+import { stripHtml } from 'string-strip-html';
 import { PageContent, PageLink } from 'types';
 import { queryClient, supabase } from 'utils';
+import { bibleApi } from 'utils/axiosClient';
+import { bibleVerseParser, verseReferenceRegex } from 'utils/verseParser';
 
 export const useGetLinks = (
   useQueryOptions?: UseQueryOptions<PageLink[], Error>
@@ -53,6 +61,95 @@ export const useGetPageContent = (
     },
     { ...useQueryOptions, enabled: !!slug }
   );
+
+export const useGetVerses = (
+  {
+    bibleId,
+    verseReferences
+  }: {
+    bibleId: string;
+    verseReferences: string[];
+  },
+  enabled?: boolean
+) => {
+  // gets multiple verses at once
+  const queries = useQueries(
+    verseReferences.map((verseReference) => ({
+      queryKey: [bibleId, verseReference],
+      queryFn: async () => {
+        const response = await bibleApi.get<BibleAPISearchResponse>(
+          `/bibles/${bibleId}/search?query=${verseReference}`
+        );
+
+        return {
+          verseReference,
+          content: stripHtml(response.data.data.passages[0].content).result
+        };
+      },
+      enabled: !!enabled,
+
+      // set these to false so that the query will not be re-run
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      retry: false,
+      retryOnMount: true
+    }))
+  );
+
+  const isLoading = queries.some((query) => query.isLoading);
+  const isError = queries.some((query) => query.isError);
+
+  if (isLoading) {
+    return { isLoading: true, verses: undefined };
+  }
+
+  if (isError) {
+    return { isLoading: false, isError: true, verses: undefined };
+  }
+
+  return {
+    isLoading: false,
+    verses: queries.reduce<{ [verseReference: string]: string }>(
+      (acc, query) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        acc[query.data!.verseReference] = query.data!.content;
+        return acc;
+      },
+      {}
+    )
+  };
+};
+
+export const useGetPageMarkdown = (slug?: string) => {
+  const { version } = useVersionContext();
+  const bibleId = bibleIds[version];
+  const { data: pageContent } = useGetPageContent(slug);
+
+  const { isLoading, verses } = useGetVerses(
+    {
+      bibleId,
+      verseReferences: pageContent?.content
+        ? pageContent.content.match(verseReferenceRegex) ?? []
+        : []
+    },
+    !!pageContent?.content
+  );
+
+  const replacedString = useMemo(() => {
+    if (!pageContent?.content) {
+      return '';
+    }
+
+    return bibleVerseParser(
+      pageContent.content,
+      version,
+      (link, matchedText) =>
+        `[${matchedText}--${verses?.[matchedText]}](${link})`
+    );
+  }, [pageContent, version, verses]);
+
+  return { isLoading, data: replacedString };
+};
 
 export const useUpdatePageContent = (
   theSlug?: string,

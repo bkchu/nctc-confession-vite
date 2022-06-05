@@ -1,25 +1,19 @@
-import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, useParams } from 'react-router-dom';
-import { VersePopover } from 'components';
-import { useVersionContext } from 'hooks';
-import { useGetPageContent } from 'queries/pages';
+import { PageLoader, VersePopover } from 'components';
+import { useGetPageMarkdown } from 'queries/pages';
 import remarkGfm from 'remark-gfm';
-import { getConfessionMarkdown } from 'services/bible';
 
 export const Page = () => {
   const params = useParams<{ slug: string }>();
-  const { data } = useGetPageContent(params.slug);
-  const { version } = useVersionContext();
-  const [markdown, setMarkdown] = useState<string | undefined>('');
 
-  const populateVerses = async (content: string) => {
-    setMarkdown(await getConfessionMarkdown(content, version));
-  };
+  const { data: markdown, isLoading: isLoadingPage } = useGetPageMarkdown(
+    params.slug
+  );
 
-  useEffect(() => {
-    void populateVerses(data?.content ?? '');
-  }, [data?.content]);
+  if (isLoadingPage) {
+    return <PageLoader />;
+  }
 
   return (
     <>
@@ -33,7 +27,11 @@ export const Page = () => {
                   props.children[0] as string
                 ).split('--');
 
-                return (
+                // if verse is not able to be fetched via the bibleApi
+                // only show the verse reference
+                return verse === 'undefined' ? (
+                  <span>{verseReference}</span>
+                ) : (
                   <VersePopover
                     verse={verse}
                     verseReference={verseReference}
