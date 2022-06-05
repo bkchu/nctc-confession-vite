@@ -4,8 +4,8 @@ import { useVersionContext } from 'hooks';
 import { useMenuContext } from 'hooks/useMenuContext';
 import { Version, Versions } from 'types';
 import { supabase } from 'utils';
+import Book from '~icons/heroicons-outline/book-open';
 import Menu from '~icons/heroicons-outline/menu-alt3';
-import User from '~icons/heroicons-outline/user';
 
 export const NavbarLayout = () => {
   const { setIsOpen } = useMenuContext();
@@ -99,7 +99,7 @@ export const NavbarLayout = () => {
               )}
             >
               <button className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 ring-expand">
-                <User className="w-5 h-5 text-slate-800 dark:text-white" />
+                <Book className="w-5 h-5 text-slate-800 dark:text-white" />
               </button>
             </Popover>
             <button
