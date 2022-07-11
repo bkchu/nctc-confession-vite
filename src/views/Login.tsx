@@ -35,7 +35,7 @@ export const Login = () => {
   });
 
   return (
-    <div className="w-64 mx-auto mt-20 prose prose-slate dark:prose-invert">
+    <div className="w-72 mx-auto px-4 mt-20 prose prose-slate dark:prose-invert">
       <form
         onSubmit={handleSubmit(async ({ email, password }) => {
           await login({ email, password });

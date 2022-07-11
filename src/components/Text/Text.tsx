@@ -18,7 +18,7 @@ export const Text = ({
 }: Props) => {
   const variantStyles: { [key: string]: string } = {
     jumbo: clsx('font-bold text-5xl md:text-6xl'),
-    h1: clsx('font-bold text-5xl leading-none'),
+    h1: clsx('font-bold text-4xl md:text-5xl leading-none'),
     h2: clsx(''),
     eyebrow: clsx('tracking-[0.105em] uppercase font-bold'),
     body: clsx(''),

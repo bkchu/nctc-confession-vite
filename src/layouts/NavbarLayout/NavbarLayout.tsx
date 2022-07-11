@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { DarkModeSwitcher, Popover, Select, Text } from 'components';
 import { useVersionContext } from 'hooks';
 import { useMenuContext } from 'hooks/useMenuContext';
@@ -10,7 +10,7 @@ import Menu from '~icons/heroicons-outline/menu-alt3';
 export const NavbarLayout = () => {
   const { setIsOpen } = useMenuContext();
   const navigate = useNavigate();
-
+  const location = useLocation();
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { setVersion, version } = useVersionContext();
   const versions = Object.keys(Versions).map((key) => ({
@@ -22,6 +22,9 @@ export const NavbarLayout = () => {
     await supabase.auth.signOut();
     navigate(0);
   };
+
+  const isOnLoginOrSignUp =
+    location.pathname === '/login' || location.pathname === '/sign-up';
 
   return (
     <div className="min-h-screen dark:bg-slate-800">
@@ -67,53 +70,66 @@ export const NavbarLayout = () => {
             </Text>
           </Link>
           <div className="flex items-center justify-between gap-4">
-            <Popover
-              placement="top-end"
-              render={({ close }) => (
-                <div
-                  id="dropdownDivider"
-                  className="z-10 w-64 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
-                >
-                  <div
-                    className="flex items-center gap-4 px-4 py-3 text-sm text-slate-700 dark:text-slate-200"
-                    aria-labelledby="dropdownDividerButton"
-                  >
-                    <Select defaultValue={version} items={versions} />
-                    <DarkModeSwitcher />
-                  </div>
-                  {!!supabase.auth.user() && (
-                    <div className="py-1">
-                      <p className="block px-4 pt-2 text-sm text-slate-700 dark:text-slate-200">
-                        Signed in as: <br />
-                      </p>
-                      <p className="block px-4 pb-2 text-sm font-bold text-slate-800 dark:text-slate-200">
-                        {supabase.auth.user()?.email}
-                      </p>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-slate-700 bg-violet-50 dark:bg-violet-800 hover:bg-violet-200 dark:hover:bg-violet-600 dark:text-slate-200 dark:hover:text-white"
-                        onClick={() => {
-                          void signOut();
-                          close();
-                        }}
+            {!isOnLoginOrSignUp && (
+              <>
+                <Popover
+                  placement="top-end"
+                  render={({ close }) => (
+                    <div
+                      id="dropdownDivider"
+                      className="z-10 w-64 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
+                    >
+                      <div
+                        className="flex items-center gap-4 px-4 py-3 text-sm text-slate-700 dark:text-slate-200"
+                        aria-labelledby="dropdownDividerButton"
                       >
-                        Sign out
-                      </a>
+                        <Select defaultValue={version} items={versions} />
+                        <DarkModeSwitcher />
+                      </div>
+                      {supabase.auth.user() ? (
+                        <div className="py-1">
+                          <p className="block px-4 pt-2 text-sm text-slate-700 dark:text-slate-200">
+                            Signed in as: <br />
+                          </p>
+                          <p className="block px-4 pb-2 text-sm font-bold text-slate-800 dark:text-slate-200">
+                            {supabase.auth.user()?.email}
+                          </p>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-slate-700 bg-violet-50 dark:bg-violet-800 hover:bg-violet-200 dark:hover:bg-violet-600 dark:text-slate-200 dark:hover:text-white"
+                            onClick={() => {
+                              void signOut();
+                              close();
+                            }}
+                          >
+                            Sign out
+                          </a>
+                        </div>
+                      ) : (
+                        <div className="py-1">
+                          <Link
+                            to="/login"
+                            className="block px-4 py-2 text-sm text-slate-700 bg-violet-50 dark:bg-violet-800 hover:bg-violet-200 dark:hover:bg-violet-600 dark:text-slate-200 dark:hover:text-white"
+                          >
+                            Sign in
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   )}
-                </div>
-              )}
-            >
-              <button className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 ring-expand">
-                <Book className="w-5 h-5 text-slate-800 dark:text-white" />
-              </button>
-            </Popover>
-            <button
-              className="flex items-center justify-center w-12 h-12 md:hidden"
-              onClick={() => setIsOpen(true)}
-            >
-              <Menu className="w-5 h-5 text-slate-800 dark:text-white" />
-            </button>
+                >
+                  <button className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 ring-expand">
+                    <Book className="w-5 h-5 text-slate-800 dark:text-white" />
+                  </button>
+                </Popover>
+                <button
+                  className="flex items-center justify-center w-12 h-12 md:hidden"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <Menu className="w-5 h-5 text-slate-800 dark:text-white" />
+                </button>
+              </>
+            )}
           </div>
         </div>
         <div className="flex items-start col-span-12">
