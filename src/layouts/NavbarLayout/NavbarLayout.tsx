@@ -77,7 +77,7 @@ export const NavbarLayout = () => {
                   render={({ close }) => (
                     <div
                       id="dropdownDivider"
-                      className="z-10 w-64 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
+                      className="z-10 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
                     >
                       <div
                         className="flex items-center gap-4 px-4 py-3 text-sm text-slate-700 dark:text-slate-200"

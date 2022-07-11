@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import { NavbarLayout, SidebarLayout } from 'layouts';
 import { Edit, Home, Login, Page, SignUp } from 'views';
@@ -13,17 +14,20 @@ const App = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route element={<NavbarLayout />}>
-        <Route element={<SidebarLayout />}>
-          <Route index element={<Home />} />
-          <Route path="page/:slug" element={<Page />} />
-          <Route path="page/:slug/edit" element={<Edit />} />
+    <>
+      <Routes>
+        <Route element={<NavbarLayout />}>
+          <Route element={<SidebarLayout />}>
+            <Route index element={<Home />} />
+            <Route path="page/:slug" element={<Page />} />
+            <Route path="page/:slug/edit" element={<Edit />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="sign-up" element={<SignUp />} />
-      </Route>
-    </Routes>
+      </Routes>
+      <Toaster position="top-right" reverseOrder={false} gutter={8} />
+    </>
   );
 };
 

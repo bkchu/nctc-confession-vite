@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Text = ({
-  color = 'text-nctcBrown-100',
+  color = 'dark:text-slate-100',
   variant = 'body',
   as = 'p',
   className,

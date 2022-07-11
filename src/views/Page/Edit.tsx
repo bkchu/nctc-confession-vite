@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import MDEditor from '@uiw/react-md-editor';
+import { Toast } from 'components';
 import { useAuthRedirect } from 'hooks';
 import { useGetPageContent, useUpdatePageContent } from 'queries/pages';
 import rehypeSanitize from 'rehype-sanitize';
@@ -16,6 +18,18 @@ export const Edit = () => {
     useUpdatePageContent(params.slug, {
       onSuccess: () => {
         navigate(`/page/${params.slug}`);
+        toast.custom((t) => (
+          <Toast variant="success" visible={t.visible} id={t.id}>
+            Your changes have been published.
+          </Toast>
+        ));
+      },
+      onError: () => {
+        toast.custom((t) => (
+          <Toast variant="error" visible={t.visible} id={t.id}>
+            You don't have sufficient permissions.
+          </Toast>
+        ));
       }
     });
 

@@ -210,8 +210,9 @@ export const useUpdatePageContent = (
         return { previousContent };
       },
       // If the mutation fails, use the context returned from onMutate to roll back
-      onError: (_err, _newContent, context) => {
+      onError: async (_err, _newContent, context) => {
         queryClient.setQueryData(queryKey, context?.previousContent);
+        await useMutationOptions?.onError?.(_err, _newContent, context);
       },
       // Always refetch after error or success:
       onSettled: async () => {
