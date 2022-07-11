@@ -26,14 +26,7 @@ const App = () => {
           <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
-      <Toaster
-        toastOptions={{
-          duration: 300000
-        }}
-        position="top-right"
-        reverseOrder={false}
-        gutter={8}
-      />
+      <Toaster position="top-right" reverseOrder={false} gutter={8} />
     </>
   );
 };
