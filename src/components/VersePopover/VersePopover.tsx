@@ -14,19 +14,18 @@ export const VersePopover = ({
   ...rest
 }: VerseTooltipProps) => {
   const { version } = useVersionContext();
-
   return (
     <Popover
       render={({ close, labelId, descriptionId }) => (
         <span className="z-50 block max-w-sm p-6 prose bg-white border rounded-lg shadow-md border-slate-200 prose-slate dark:prose-invert dark:bg-slate-800 dark:border-slate-700">
           <blockquote
-            className="px-8 overflow-y-auto dark:text-white max-h-96"
+            className="px-8 overflow-y-auto dark:text-white max-h-[29vh]"
             id={descriptionId}
           >
             {verse} <br />
           </blockquote>
           <cite className="dark:text-white" id={labelId}>
-            {verseReference} {version}
+            {verseReference} KJV
           </cite>
           <br />
           <a
@@ -35,7 +34,7 @@ export const VersePopover = ({
             {...rest}
             onClick={close}
           >
-            Open in YouVersion
+            Open {version} in YouVersion
             <NarrowArrowRight className="inline-block ml-2" />
           </a>
         </span>

@@ -83,9 +83,15 @@ export const NavbarLayout = () => {
                   </div>
                   {!!supabase.auth.user() && (
                     <div className="py-1">
+                      <p className="block px-4 pt-2 text-sm text-slate-700 dark:text-slate-200">
+                        Signed in as: <br />
+                      </p>
+                      <p className="block px-4 pb-2 text-sm font-bold text-slate-800 dark:text-slate-200">
+                        {supabase.auth.user()?.email}
+                      </p>
                       <a
                         href="#"
-                        className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 dark:text-slate-200 dark:hover:text-white"
+                        className="block px-4 py-2 text-sm text-slate-700 bg-violet-50 dark:bg-violet-800 hover:bg-violet-200 dark:hover:bg-violet-600 dark:text-slate-200 dark:hover:text-white"
                         onClick={() => {
                           void signOut();
                           close();
