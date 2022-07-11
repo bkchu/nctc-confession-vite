@@ -77,7 +77,7 @@ export const NavbarLayout = () => {
                   render={({ close }) => (
                     <div
                       id="dropdownDivider"
-                      className=" min-w-[256px] z-10 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
+                      className=" min-w-[256px] max-w-xs z-10 bg-white divide-y rounded shadow divide-slate-100 dark:bg-slate-800 dark:border dark:border-slate-700 dark:divide-slate-600"
                     >
                       <div
                         className="flex items-center gap-4 px-4 py-3 text-sm text-slate-700 dark:text-slate-200"
@@ -91,7 +91,7 @@ export const NavbarLayout = () => {
                           <p className="block px-4 pt-2 text-sm text-slate-700 dark:text-slate-200">
                             Signed in as: <br />
                           </p>
-                          <p className="block px-4 pb-2 text-sm font-bold text-slate-800 dark:text-slate-200">
+                          <p className="block px-4 pb-2 text-sm font-bold text-slate-800 dark:text-slate-200 truncate">
                             {supabase.auth.user()?.email}
                           </p>
                           <a
