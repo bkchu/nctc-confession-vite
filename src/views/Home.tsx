@@ -4,7 +4,7 @@ import { Text } from 'components';
 export const Home = () => {
   const navigate = useNavigate();
   const startAffirmation = () =>
-    navigate('page/how-to-use-these-confessions-effectively');
+    navigate('page/how-to-effectively-utilize-confession');
   return (
     <>
       <Text variant="h1" className="prose prose-slate dark:prose-invert ">
